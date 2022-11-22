@@ -1,0 +1,46 @@
+*{
+    scroll-behavior: smooth;
+}
+
+.mt-50{
+    margin-top: 5em;
+}
+
+.mt-70{
+    margin-top: 7em;
+}
+
+.ml-50{
+    margin-left: 5em;
+}
+.mt-120{
+    margin-top: 12em;
+}
+
+.mt-100{
+    margin-top: 10em;
+}
+.font-size-36{
+    font-size: 36px;
+}
+.font-size-50{
+    font-size: 50px;
+}
+.bg-light-green{
+    background-color: rgb(216, 240, 216);
+}
+.w-750{
+    width: 75em;
+}
+.w-625{
+    width: 625px;
+}
+.h-600{
+    height: 600px;
+}
+.mt-500{
+    margin-top: 50em;
+}
+.pt-7{
+padding-top: 0.7rem;
+}
