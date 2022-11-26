@@ -44,7 +44,9 @@
     </div>
 
     <div class="d-flex">
-      <button onclick="location='userPanel'" class="btn btn-primary mr-15"><i class="icon-user"> </i></button>
+      <button onclick="location='userPanel'" class="btn btn-primary mr-15">
+        <i class="icon-user" th:text="${session.role}"> </i>
+      </button>
 
       <button onclick="location='myCart'" class="btn btn-primary ml-auto mr-15"><i class="icon-basket"></i></button>
 
