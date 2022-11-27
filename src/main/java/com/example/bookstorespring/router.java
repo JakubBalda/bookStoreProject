@@ -21,7 +21,6 @@ public class router {
         return "register";
     }
 
-    @GetMapping("/userPanel")
-    public String userPanelPage(){ return "userPanel"; }
+
 
 }

@@ -66,55 +66,55 @@
         <div class="form-row row-eq-spacing-sm">
           <div class="col-sm">
             <label for="name">Imię</label>
-            <input type="text" class="form-control" id="name" name="name" value="" required="required">
+            <input type="text" class="form-control" id="name" name="name" th:value="${user.name}" required="required">
           </div>
           <div class="col-sm">
             <label for="surname" >Nazwisko</label>
-            <input type="text" class="form-control" id="surname" name="surname" value="" required="required">
+            <input type="text" class="form-control" id="surname" name="surname" th:value="${user.surname}" required="required">
           </div>
         </div>
 
         <div class="form-row row-eq-spacing-sm">
           <div class="col-sm">
             <label for="streat" >Ulica</label>
-            <input type="text" class="form-control" id="streat" name="street" value="" required="required">
+            <input type="text" class="form-control" id="streat" name="street" th:value="${user.street}" required="required">
           </div>
           <div class="col-sm">
             <label for="house" >Nr domu</label>
-            <input type="text" class="form-control" id="house" name="house" value="" required="required">
+            <input type="text" class="form-control" id="house" name="house" th:value="${user.houseNumber}" required="required">
           </div>
           <div class="col-sm">
             <label for="flat">Nr mieszkania</label>
-            <input type="text" class="form-control" id="flat" name="flat" value="">
+            <input type="text" class="form-control" id="flat" name="flat" th:value="${user.flatNumber}">
           </div>
         </div>
 
         <div class="form-row row-eq-spacing-sm">
           <div class="col-sm">
             <label for="town" >Miasto</label>
-            <input type="text" class="form-control" id="town" name="town" value="" required="required">
+            <input type="text" class="form-control" id="town" name="town" th:value="${user.city}" required="required">
           </div>
           <div class="col-sm">
             <label for="postal" >Kod pocztowy</label>
-            <input type="text" class="form-control" id="postal" name="postal" value="" required="required">
+            <input type="text" class="form-control" id="postal" name="postal" th:value="${user.postalCode}" required="required">
           </div>
         </div>
 
         <div class="form-row row-eq-spacing-sm">
           <div class="col-sm">
             <label for="login-reg" >Login</label>
-            <input type="text" class="form-control" id="login-reg" name="login" value="" required="required">
+            <input type="text" class="form-control" id="login-reg" name="login" th:value="${user.login}" required="required">
           </div>
         </div>
 
         <div class="form-row row-eq-spacing-sm">
           <div class="col-sm">
             <label for="phone" >Nr telefonu</label>
-            <input type="text" class="form-control" id="phone" name="phone" value=""  required="required">
+            <input type="text" class="form-control" id="phone" name="phone" th:value="${user.phoneNumber}"  required="required">
           </div>
           <div class="col-sm">
             <label for="e-mail" >E-mail</label>
-            <input type="text" class="form-control" id="e-mail" name="mail"value="" required="required">
+            <input type="text" class="form-control" id="e-mail" name="mail"th:value="${user.email}" required="required">
           </div>
         </div>
 
