@@ -66,55 +66,55 @@
         <div class="form-row row-eq-spacing-sm">
           <div class="col-sm">
             <label for="name">Imię</label>
-            <input type="text" class="form-control" id="name" name="name" th:value="${user.name}" required="required">
+            <input type="text" class="form-control" id="name" name="name" th:value="${session.user.name}" required="required">
           </div>
           <div class="col-sm">
             <label for="surname" >Nazwisko</label>
-            <input type="text" class="form-control" id="surname" name="surname" th:value="${user.surname}" required="required">
+            <input type="text" class="form-control" id="surname" name="surname" th:value="${session.user.surname}" required="required">
           </div>
         </div>
 
         <div class="form-row row-eq-spacing-sm">
           <div class="col-sm">
             <label for="streat" >Ulica</label>
-            <input type="text" class="form-control" id="streat" name="street" th:value="${user.street}" required="required">
+            <input type="text" class="form-control" id="streat" name="street" th:value="${session.user.street}" required="required">
           </div>
           <div class="col-sm">
             <label for="house" >Nr domu</label>
-            <input type="text" class="form-control" id="house" name="house" th:value="${user.houseNumber}" required="required">
+            <input type="text" class="form-control" id="house" name="house" th:value="${session.user.houseNumber}" required="required">
           </div>
           <div class="col-sm">
             <label for="flat">Nr mieszkania</label>
-            <input type="text" class="form-control" id="flat" name="flat" th:value="${user.flatNumber}">
+            <input type="text" class="form-control" id="flat" name="flat" th:value="${session.user.flatNumber}">
           </div>
         </div>
 
         <div class="form-row row-eq-spacing-sm">
           <div class="col-sm">
             <label for="town" >Miasto</label>
-            <input type="text" class="form-control" id="town" name="town" th:value="${user.city}" required="required">
+            <input type="text" class="form-control" id="town" name="town" th:value="${session.user.city}" required="required">
           </div>
           <div class="col-sm">
             <label for="postal" >Kod pocztowy</label>
-            <input type="text" class="form-control" id="postal" name="postal" th:value="${user.postalCode}" required="required">
+            <input type="text" class="form-control" id="postal" name="postal" th:value="${session.user.postalCode}" required="required">
           </div>
         </div>
 
         <div class="form-row row-eq-spacing-sm">
           <div class="col-sm">
             <label for="login-reg" >Login</label>
-            <input type="text" class="form-control" id="login-reg" name="login" th:value="${user.login}" required="required">
+            <input type="text" class="form-control" id="login-reg" name="login" th:value="${session.user.login}" required="required">
           </div>
         </div>
 
         <div class="form-row row-eq-spacing-sm">
           <div class="col-sm">
             <label for="phone" >Nr telefonu</label>
-            <input type="text" class="form-control" id="phone" name="phone" th:value="${user.phoneNumber}"  required="required">
+            <input type="text" class="form-control" id="phone" name="phone" th:value="${session.user.phoneNumber}"  required="required">
           </div>
           <div class="col-sm">
             <label for="e-mail" >E-mail</label>
-            <input type="text" class="form-control" id="e-mail" name="mail"th:value="${user.email}" required="required">
+            <input type="text" class="form-control" id="e-mail" name="mail"th:value="${session.user.email}" required="required">
           </div>
         </div>
 
@@ -128,19 +128,20 @@
     <div class="card mt-100 w-300 h-500 shadow bg-primary text-white text-center">
       <h2 class="content-title">Zmień hasło</h2>
 
-      <form action="editUserPassword" method="get">
+      <form action="editUserPassword" method="post">
         <div class="form-row row-eq-spacing-sm">
-          <label for="new-password" >Nowe hasło</label>
-          <input type="password" class="form-control" id="new-password" name="new-password" placeholder="Nowe hasło"  required="required">
+          <label for="newPassword" >Nowe hasło</label>
+          <input type="password" class="form-control" id="newPassword" name="newPassword" placeholder="Nowe hasło"  required="required">
         </div>
         <div class="form-row row-eq-spacing-sm">
-          <label for="new-password-2" >Powtórz nowe hasło</label>
-          <input type="password" class="form-control" id="new-password-2" name="new-password-2" placeholder="Powtórz nowe hasło" required="required">
+          <label for="checkPassword" >Powtórz nowe hasło</label>
+          <input type="password" class="form-control" id="checkPassword" name="checkPassword" placeholder="Powtórz nowe hasło" required="required">
         </div>
 
         <input type="submit" class="btn btn-success" value="Zmień">
 
       </form>
+      <div th:text="${message}"></div>
     </div>
   </div>
 

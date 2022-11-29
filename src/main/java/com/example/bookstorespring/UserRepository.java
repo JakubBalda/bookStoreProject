@@ -59,4 +59,11 @@ public class UserRepository {
         }
         return null;
     }
+
+    public static boolean changePassword(String newPassword, int userID){
+        String query = "UPDATE users SET Password = ? WHERE User_ID = ?";
+
+        //jdbcTemplate.update(query, newPassword, userID);
+        return true;
+    }
 }

@@ -4,10 +4,10 @@ import java.sql.ResultSet;
 
 public class GetUserDataUseCase {
 
-    public static UserDTO getData(String userID){
+    public static UserModel getData(String userID){
         ResultSet userData = UserRepository.userData(userID);
 
-        UserDTO user = new UserDTO();
+        UserModel user = new UserModel();
 
         try{
             if(userData != null){

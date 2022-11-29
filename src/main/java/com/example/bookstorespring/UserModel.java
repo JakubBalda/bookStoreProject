@@ -1,6 +1,6 @@
 package com.example.bookstorespring;
 
-public class UserDTO {
+public class UserModel {
     private String name;
     private String surname;
     private String phoneNumber;
@@ -12,7 +12,7 @@ public class UserDTO {
     private String postalCode;
     private String login;
 
-    public UserDTO(){
+    public UserModel(){
 
     }
 
