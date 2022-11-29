@@ -2,18 +2,32 @@ package com.example.bookstorespring;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 
+@Repository
 public class UserRepository {
+
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    public static ResultSet databaseResults(String query, String firstQueryParameter){
-
+    public static PreparedStatement dbConnection(String query){
         try {
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/greatbook", "root", "");
             PreparedStatement preparedStatement = conn.prepareStatement(query);
+
+            return preparedStatement;
+        }catch(Exception ex){
+            System.out.println(ex);
+        }
+        return null;
+    }
+
+    public static ResultSet select(String query, String firstQueryParameter){
+
+        try {
+            PreparedStatement preparedStatement = dbConnection(query);
             preparedStatement.setString(1, firstQueryParameter);
             ResultSet rs = preparedStatement.executeQuery();
 
@@ -26,12 +40,26 @@ public class UserRepository {
         return null;
     }
 
+    public static Boolean update(String query, String[] parameters){
+        try{
+            PreparedStatement preparedStatement = dbConnection(query);
+            for(int i = 0; i<parameters.length; i++) {
+                preparedStatement.setString(i+1, parameters[i]);
+            }
+            preparedStatement.executeUpdate();
+
+            return true;
+        }catch(Exception ex){
+            System.out.println(ex);
+        }
+        return false;
+    }
 
     public static String[] loginData(String login){
         String[] userLoginData = new String[4];
         String query = "SELECT User_ID, Login, Password, Role FROM Users WHERE Login = ?";
 
-        ResultSet result = databaseResults(query, login);
+        ResultSet result = select(query, login);
         try{
             if(result != null) {
                 while (result.next()) {
@@ -53,17 +81,19 @@ public class UserRepository {
         String query = "SELECT Name, Surname, Phone_number, Email, City, Street, House_number, Flat_number, " +
                 "Postal_code, Login FROM Users WHERE User_ID = ?";
 
-        ResultSet result = databaseResults(query, userID);
+        ResultSet result = select(query, userID);
         if(result != null){
             return result;
         }
         return null;
     }
 
-    public static boolean changePassword(String newPassword, int userID){
+    public static boolean changePassword(String newPassword, String userID) throws NullPointerException{
         String query = "UPDATE users SET Password = ? WHERE User_ID = ?";
-
-        //jdbcTemplate.update(query, newPassword, userID);
-        return true;
+        String[] parameters = new String[]{newPassword, userID};
+        if(update(query, parameters)){
+            return true;
+        }
+        return false;
     }
 }

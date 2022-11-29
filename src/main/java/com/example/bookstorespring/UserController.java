@@ -21,7 +21,7 @@ public class UserController {
 
     @PostMapping("/editUserPassword")
     public String editUserPassword(Model model,HttpSession session ,@RequestParam("newPassword") String newPassword, @RequestParam("checkPassword") String checkPassword){
-        if(EditUserPasswordUseCase.editPassword(newPassword, checkPassword, (int) session.getAttribute("userID"))) {
+        if(EditUserPasswordUseCase.editPassword(newPassword, checkPassword, (String) session.getAttribute("userID"))) {
             model.addAttribute("message", "Hasło poprawnie zmienione");
         }else{
             model.addAttribute("message", "Hasło nie zostało zmienione, sprawdź poprawność danych");
