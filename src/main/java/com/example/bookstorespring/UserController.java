@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 @Controller
 public class UserController {
@@ -27,5 +28,18 @@ public class UserController {
             model.addAttribute("message", "Hasło nie zostało zmienione, sprawdź poprawność danych");
         }
         return "userPanel";
+    }
+
+    @PostMapping("/editUserData")
+    public String editUserData(@RequestParam Map<String, String> allRequestedParams, HttpSession session){
+
+        UserModel user = GetUserDataUseCase.getData(session.getAttribute("userID").toString());
+
+        if (EditUserDataUseCase.editData(user, allRequestedParams, session.getAttribute("userID").toString())) {
+            session.setAttribute("message", "Zmiany zostały zapisane");
+        }else{
+            session.setAttribute("message", "Zmiany nie zostały zapisane");
+        }
+        return "redirect:userPanel";
     }
 }

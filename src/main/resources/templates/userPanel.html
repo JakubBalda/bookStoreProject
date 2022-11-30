@@ -60,7 +60,7 @@
 <div class="content-wrapper bg-dark-light">
   <div class="d-flex h-full justify-content-around">
     <div class="card mt-100 w-500 h-550 shadow text-center text-white bg-primary">
-      <form action="" method="get">
+      <form action="editUserData" method="post">
         <h2 class="content-title">Edytuj dane</h2>
 
         <div class="form-row row-eq-spacing-sm">
@@ -76,8 +76,8 @@
 
         <div class="form-row row-eq-spacing-sm">
           <div class="col-sm">
-            <label for="streat" >Ulica</label>
-            <input type="text" class="form-control" id="streat" name="street" th:value="${session.user.street}" required="required">
+            <label for="street" >Ulica</label>
+            <input type="text" class="form-control" id="street" name="street" th:value="${session.user.street}" required="required">
           </div>
           <div class="col-sm">
             <label for="house" >Nr domu</label>
@@ -122,6 +122,7 @@
           <input type="submit" class="btn btn-success" value="Edytuj">
         </div>
       </form>
+      <div th:text="${session.message}"></div>
     </div>
 
 

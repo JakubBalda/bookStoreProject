@@ -24,11 +24,13 @@ public class UserRepository {
         return null;
     }
 
-    public static ResultSet select(String query, String firstQueryParameter){
+    public static ResultSet select(String query, String[] parameters){
 
         try {
             PreparedStatement preparedStatement = dbConnection(query);
-            preparedStatement.setString(1, firstQueryParameter);
+            for(int i = 0; i<parameters.length; i++) {
+                preparedStatement.setString(i+1, parameters[i]);
+            }
             ResultSet rs = preparedStatement.executeQuery();
 
             return rs;
@@ -58,8 +60,9 @@ public class UserRepository {
     public static String[] loginData(String login){
         String[] userLoginData = new String[4];
         String query = "SELECT User_ID, Login, Password, Role FROM Users WHERE Login = ?";
+        String[] parameters = new String[]{login};
 
-        ResultSet result = select(query, login);
+        ResultSet result = select(query, parameters);
         try{
             if(result != null) {
                 while (result.next()) {
@@ -80,8 +83,9 @@ public class UserRepository {
     public static ResultSet userData(String userID){
         String query = "SELECT Name, Surname, Phone_number, Email, City, Street, House_number, Flat_number, " +
                 "Postal_code, Login FROM Users WHERE User_ID = ?";
+        String[] parameters = new String[]{userID};
 
-        ResultSet result = select(query, userID);
+        ResultSet result = select(query, parameters);
         if(result != null){
             return result;
         }
@@ -91,8 +95,20 @@ public class UserRepository {
     public static boolean changePassword(String newPassword, String userID) throws NullPointerException{
         String query = "UPDATE users SET Password = ? WHERE User_ID = ?";
         String[] parameters = new String[]{newPassword, userID};
+
         if(update(query, parameters)){
             return true;
+        }
+        return false;
+    }
+
+    public static boolean updateUserData(String query){
+        PreparedStatement preparedStatement = dbConnection(query);
+        try {
+            preparedStatement.executeUpdate();
+            return true;
+        }catch(Exception ex){
+            System.out.println(ex);
         }
         return false;
     }
