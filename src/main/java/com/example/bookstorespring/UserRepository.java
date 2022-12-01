@@ -57,22 +57,22 @@ public class UserRepository {
         return false;
     }
 
-    public static String[] loginData(String login){
-        String[] userLoginData = new String[4];
+    public static LoginModel loginData(String login){
         String query = "SELECT User_ID, Login, Password, Role FROM Users WHERE Login = ?";
         String[] parameters = new String[]{login};
+        LoginModel loginData = new LoginModel();
 
         ResultSet result = select(query, parameters);
         try{
             if(result != null) {
                 while (result.next()) {
-                    userLoginData[0] = result.getString(1);
-                    userLoginData[1] = result.getString(2);
-                    userLoginData[2] = result.getString(3);
-                    userLoginData[3] = result.getString(4);
+                    loginData.setUserID(result.getString(1));
+                    loginData.setLogin(result.getString(2));
+                    loginData.setPassword(result.getString(3));
+                    loginData.setRole(result.getString(4));
                 }
 
-                return userLoginData;
+                return loginData;
             }
         }catch(Exception ex){
             System.out.println(ex);

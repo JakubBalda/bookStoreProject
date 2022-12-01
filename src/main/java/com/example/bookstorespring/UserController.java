@@ -23,9 +23,9 @@ public class UserController {
     @PostMapping("/editUserPassword")
     public String editUserPassword(Model model,HttpSession session ,@RequestParam("newPassword") String newPassword, @RequestParam("checkPassword") String checkPassword){
         if(EditUserPasswordUseCase.editPassword(newPassword, checkPassword, (String) session.getAttribute("userID"))) {
-            model.addAttribute("message", "Hasło poprawnie zmienione");
+            model.addAttribute("message", "Password changed");
         }else{
-            model.addAttribute("message", "Hasło nie zostało zmienione, sprawdź poprawność danych");
+            model.addAttribute("message", "Password not changed, password must be strong");
         }
         return "userPanel";
     }
@@ -36,9 +36,9 @@ public class UserController {
         UserModel user = GetUserDataUseCase.getData(session.getAttribute("userID").toString());
 
         if (EditUserDataUseCase.editData(user, allRequestedParams, session.getAttribute("userID").toString())) {
-            session.setAttribute("message", "Zmiany zostały zapisane");
+            session.setAttribute("message", "Changes saved");
         }else{
-            session.setAttribute("message", "Zmiany nie zostały zapisane");
+            session.setAttribute("message", "Changes cannot be saved or any data got changed");
         }
         return "redirect:userPanel";
     }

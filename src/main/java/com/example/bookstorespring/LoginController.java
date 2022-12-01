@@ -18,18 +18,17 @@ public class LoginController {
     @PostMapping("/signIn")
     public String loggingIn(@RequestParam("login") String login, @RequestParam("password") String password, HttpSession session, Model model) throws NullPointerException{
 
-        String[] user = UserRepository.loginData(login);
+        LoginModel user = UserRepository.loginData(login);
         try {
-            if (user != null && user[1].equals(login) && user[2].equals(password)) {
-                session.setAttribute("role", user[3]);
-                session.setAttribute("userID", user[0]);
-                return "index";
+            if (user != null && user.getLogin().equals(login) && user.getPassword().equals(password)) {
+                session.setAttribute("role", user.getRole());
+                session.setAttribute("userID", user.getUserID());
+                return "redirect:/";
             } else {
                 model.addAttribute("message", "Unable to login, wrong password or login");
                 return "login";
             }
         }catch (NullPointerException ex){
-            System.out.println("null");
             model.addAttribute("message", "Incorrect login");
         }
         return "login";
@@ -38,6 +37,6 @@ public class LoginController {
     @GetMapping("/logout")
     public String logout(HttpSession session){
         session.removeAttribute("role");
-        return "index";
+        return "redirect:/";
     }
 }
