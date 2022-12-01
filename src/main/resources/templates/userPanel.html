@@ -60,61 +60,64 @@
 <div class="content-wrapper bg-dark-light">
   <div class="d-flex h-full justify-content-around">
     <div class="card mt-100 w-500 h-550 shadow text-center text-white bg-primary">
-      <form action="editUserData" method="post">
+      <form th:action="@{/editUserData}" th:object="${userModelForm}" method="post">
         <h2 class="content-title">Edytuj dane</h2>
 
         <div class="form-row row-eq-spacing-sm">
           <div class="col-sm">
             <label for="name">Imię</label>
-            <input type="text" class="form-control" id="name" name="name" th:value="${session.user.name}" required="required">
+            <input type="text" class="form-control" id="name" name="name" th:field="*{name}" required="required" >
+            <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Full name error</span>
           </div>
           <div class="col-sm">
             <label for="surname" >Nazwisko</label>
-            <input type="text" class="form-control" id="surname" name="surname" th:value="${session.user.surname}" required="required">
+            <input type="text" class="form-control" id="surname" name="surname" required="required" th:field="*{surname}">
           </div>
         </div>
 
         <div class="form-row row-eq-spacing-sm">
           <div class="col-sm">
             <label for="street" >Ulica</label>
-            <input type="text" class="form-control" id="street" name="street" th:value="${session.user.street}" required="required">
+            <input type="text" class="form-control" id="street" name="street" required="required" th:field="*{street}">
           </div>
           <div class="col-sm">
             <label for="house" >Nr domu</label>
-            <input type="text" class="form-control" id="house" name="house" th:value="${session.user.houseNumber}" required="required">
+            <input type="text" class="form-control" id="house" name="house" required="required" th:field="*{houseNumber}">
+            <span th:if="${#fields.hasErrors('houseNumber')}" th:errors="*{houseNumber}">Full name error</span>
+
           </div>
           <div class="col-sm">
             <label for="flat">Nr mieszkania</label>
-            <input type="text" class="form-control" id="flat" name="flat" th:value="${session.user.flatNumber}">
+            <input type="text" class="form-control" id="flat" name="flat" th:field="*{flatNumber}">
           </div>
         </div>
 
         <div class="form-row row-eq-spacing-sm">
           <div class="col-sm">
             <label for="town" >Miasto</label>
-            <input type="text" class="form-control" id="town" name="town" th:value="${session.user.city}" required="required">
+            <input type="text" class="form-control" id="town" name="town" required="required" th:field="*{city}">
           </div>
           <div class="col-sm">
             <label for="postal" >Kod pocztowy</label>
-            <input type="text" class="form-control" id="postal" name="postal" th:value="${session.user.postalCode}" required="required">
+            <input type="text" class="form-control" id="postal" name="postal" required="required" th:field="*{postalCode}">
           </div>
         </div>
 
         <div class="form-row row-eq-spacing-sm">
           <div class="col-sm">
             <label for="login-reg" >Login</label>
-            <input type="text" class="form-control" id="login-reg" name="login" th:value="${session.user.login}" required="required">
+            <input type="text" class="form-control" id="login-reg" name="login" required="required" th:field="*{login}">
           </div>
         </div>
 
         <div class="form-row row-eq-spacing-sm">
           <div class="col-sm">
             <label for="phone" >Nr telefonu</label>
-            <input type="text" class="form-control" id="phone" name="phone" th:value="${session.user.phoneNumber}"  required="required">
+            <input type="text" class="form-control" id="phone" name="phone" required="required" th:field="*{phoneNumber}">
           </div>
           <div class="col-sm">
             <label for="e-mail" >E-mail</label>
-            <input type="text" class="form-control" id="e-mail" name="mail"th:value="${session.user.email}" required="required">
+            <input type="text" class="form-control" id="e-mail" name="mail" required="required" th:field="*{email}">
           </div>
         </div>
 

@@ -1,12 +1,14 @@
 package com.example.bookstorespring;
 
+import org.springframework.web.bind.annotation.ModelAttribute;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class EditUserDataUseCase {
 
-    public static boolean editData(UserModel user, Map<String, String> allData, String userID){
-        Map<String, String> newData = findDifferences(user, allData);
+    public static boolean editData(UserModel user, @ModelAttribute("userModelForm") UserModel userModelForm, String userID){
+        Map<String, String> newData = findDifferences(user, userModelForm);
         if(newData.size() != 0) {
             String query = makeQuery(newData, userID);
             UserRepository.updateUserData(query);
@@ -15,56 +17,56 @@ public class EditUserDataUseCase {
         return false;
     }
 
-    public static Map<String, String> findDifferences(UserModel user, Map<String, String> allData){
+    public static Map<String, String> findDifferences(UserModel user, UserModel userModelForm){
         Map<String, String> newUserData = new HashMap<>();
-        if(allData.get("flat") == ""){
+       /* if(allData.get("flat") == ""){
             allData.put("flat", null);
+        }*/
+
+        if(!user.getName().equals(userModelForm.getName())){
+            newUserData.put("Name", userModelForm.getName());
         }
 
-        if(!user.getName().equals(allData.get("name"))){
-            newUserData.put("Name", allData.get("name"));
+        if(!user.getSurname().equals(userModelForm.getSurname())){
+            newUserData.put("Surname", userModelForm.getSurname());
         }
 
-        if(!user.getSurname().equals(allData.get("surname"))){
-            newUserData.put("Surname", allData.get("surname"));
+        if(!user.getPhoneNumber().equals(userModelForm.getPhoneNumber())){
+            newUserData.put("Phone_number", userModelForm.getPhoneNumber());
         }
 
-        if(!user.getPhoneNumber().equals(allData.get("phone"))){
-            newUserData.put("Phone_number", allData.get("phone"));
+        if(!user.getEmail().equals(userModelForm.getEmail())){
+            newUserData.put("Email", userModelForm.getEmail());
         }
 
-        if(!user.getEmail().equals(allData.get("mail"))){
-            newUserData.put("Email", allData.get("mail"));
+        if(!user.getCity().equals(userModelForm.getCity())){
+            newUserData.put("City", userModelForm.getCity());
         }
 
-        if(!user.getCity().equals(allData.get("town"))){
-            newUserData.put("City", allData.get("town"));
+        if(!user.getStreet().equals(userModelForm.getStreet())){
+            newUserData.put("Street", userModelForm.getStreet());
         }
 
-        if(!user.getStreet().equals(allData.get("street"))){
-            newUserData.put("Street", allData.get("street"));
-        }
-
-        if(!user.getHouseNumber().equals(allData.get("house"))){
-            newUserData.put("House_number", allData.get("house"));
+        if(!user.getHouseNumber().equals(userModelForm.getHouseNumber())){
+            newUserData.put("House_number", userModelForm.getHouseNumber());
         }
 
         if(user.getFlatNumber() != null) {
-            if (!user.getFlatNumber().equals(allData.get("flat"))) {
-                newUserData.put("Flat_number", allData.get("flat"));
+            if (!user.getFlatNumber().equals(userModelForm.getFlatNumber())){
+                newUserData.put("Flat_number", userModelForm.getFlatNumber());
             }
         }else{
-            if (user.getFlatNumber() != allData.get("flat")) {
-                newUserData.put("Flat_number", allData.get("flat"));
+            if (user.getFlatNumber() != userModelForm.getFlatNumber()){
+                newUserData.put("Flat_number", userModelForm.getFlatNumber());
             }
         }
 
-        if(!user.getPostalCode().equals(allData.get("postal"))){
-            newUserData.put("Postal_code", allData.get("postal"));
+        if(!user.getPostalCode().equals(userModelForm.getPostalCode())){
+            newUserData.put("Postal_code", userModelForm.getPostalCode());
         }
 
-        if(!user.getLogin().equals(allData.get("login"))){
-            newUserData.put("Login", allData.get("login"));
+        if(!user.getLogin().equals(userModelForm.getLogin())){
+            newUserData.put("Login", userModelForm.getLogin());
         }
 
         return newUserData;

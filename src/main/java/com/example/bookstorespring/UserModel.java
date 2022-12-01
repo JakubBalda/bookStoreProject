@@ -1,21 +1,37 @@
 package com.example.bookstorespring;
 
-public class UserModel {
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
+
+public class UserModel implements Serializable {
+    @NotBlank(message = "Name is mandatory")
     private String name;
+    @NotBlank(message = "Surname is mandatory")
     private String surname;
+    @NotBlank(message = "Phone number is mandatory")
     private String phoneNumber;
+    @NotBlank(message = "Email is mandatory")
+    @Email(message = "Incorrect email")
     private String email;
+    @NotBlank(message = "City is mandatory")
     private String city;
+    @NotBlank(message = "Street is mandatory")
     private String street;
+    @NotBlank(message = "House number is mandatory")
+    @Min(1)
     private String houseNumber;
     private String flatNumber;
+    @NotBlank(message = "Psotal code is mandatory")
     private String postalCode;
+    @NotBlank(message = "Login is mandatory")
     private String login;
 
     public UserModel(){
 
     }
-
     public void setName(String name) {
         this.name = name;
     }

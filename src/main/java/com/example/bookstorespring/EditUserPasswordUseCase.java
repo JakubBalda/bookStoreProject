@@ -8,7 +8,7 @@ public class EditUserPasswordUseCase {
 
         try {
             if (newPassword.equals(checkPassword)) {
-                if (passwordIsValid(newPassword)){
+                if (Validator.passwordIsValid(newPassword)){
                     if (UserRepository.changePassword(newPassword, userID)) {
                         return true;
                     } else {
@@ -23,13 +23,5 @@ public class EditUserPasswordUseCase {
         return false;
     }
 
-    public static boolean passwordIsValid(String password){
-        final String PASSWORD_PATTERN =
-                "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$";
-        final Pattern pattern  = Pattern.compile(PASSWORD_PATTERN);
 
-        Matcher matcher = pattern.matcher(password);
-
-        return matcher.matches();
-    }
 }

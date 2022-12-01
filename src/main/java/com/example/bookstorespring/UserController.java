@@ -1,7 +1,9 @@
 package com.example.bookstorespring;
 
+import org.apache.catalina.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import javax.validation.Valid;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,9 +15,9 @@ import java.util.Map;
 public class UserController {
 
     @GetMapping("/userPanel")
-    public String userPanelPage(HttpSession session){
+    public String userPanelPage(HttpSession session, Model model){
         UserModel user = GetUserDataUseCase.getData(session.getAttribute("userID").toString());
-        session.setAttribute("user", user);
+        model.addAttribute("userModelForm", user);
 
         return "userPanel";
     }
@@ -31,11 +33,11 @@ public class UserController {
     }
 
     @PostMapping("/editUserData")
-    public String editUserData(@RequestParam Map<String, String> allRequestedParams, HttpSession session){
+    public String editUserData(@Valid UserModel userModelForm, HttpSession session){
 
         UserModel user = GetUserDataUseCase.getData(session.getAttribute("userID").toString());
 
-        if (EditUserDataUseCase.editData(user, allRequestedParams, session.getAttribute("userID").toString())) {
+        if (EditUserDataUseCase.editData(user, userModelForm, session.getAttribute("userID").toString())) {
             session.setAttribute("message", "Changes saved");
         }else{
             session.setAttribute("message", "Changes cannot be saved or any data got changed");
