@@ -112,4 +112,18 @@ public class UserRepository {
         }
         return false;
     }
+
+    public static void deleteAccount(String userID) throws Exception{
+        String query = "DELETE FROM users WHERE User_ID = ?";
+
+        try {
+            PreparedStatement preparedStatement = dbConnection(query);
+            preparedStatement.setString(1, userID);
+
+            preparedStatement.executeUpdate();
+        }catch (Exception ex){
+            System.out.println(ex);
+
+        }
+    }
 }

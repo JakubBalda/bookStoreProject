@@ -1,13 +1,11 @@
 package com.example.bookstorespring;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 
-public class UserModel implements Serializable {
+public class UserModel {
     @NotBlank(message = "Name is mandatory")
+    @Size(min = 3, max = 30, message = "Name must be between 3 - 30 signs")
     private String name;
     @NotBlank(message = "Surname is mandatory")
     private String surname;
