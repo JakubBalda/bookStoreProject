@@ -65,7 +65,8 @@
 <div class="content-wrapper bg-dark-light">
   <span th:text="${deleteError}"></span>
   <div class="d-flex h-full justify-content-around">
-    <div class="card mt-100 w-500 h-550 shadow text-center text-white bg-primary">
+    <div class="card mt-100 w-500 h-600 shadow text-center text-white bg-primary">
+
       <form th:action="@{/editUserData}" th:object="${userModel}" method="post">
         <h2 class="content-title">Edytuj dane</h2>
 
@@ -73,11 +74,12 @@
           <div class="col-sm">
             <label for="name">Imię</label>
             <input type="text" class="form-control" id="name" name="name" th:field="*{name}" required="required" >
-            <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Invalid name</span>
+            <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
           </div>
           <div class="col-sm">
             <label for="surname" >Nazwisko</label>
             <input type="text" class="form-control" id="surname" name="surname" required="required" th:field="*{surname}">
+            <span th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"></span>
           </div>
         </div>
 
@@ -85,16 +87,18 @@
           <div class="col-sm">
             <label for="street" >Ulica</label>
             <input type="text" class="form-control" id="street" name="street" required="required" th:field="*{street}">
+            <span th:if="${#fields.hasErrors('street')}" th:errors="*{street}"></span>
           </div>
           <div class="col-sm">
             <label for="house" >Nr domu</label>
             <input type="text" class="form-control" id="house" name="house" required="required" th:field="*{houseNumber}">
-            <span th:if="${#fields.hasErrors('houseNumber')}" th:errors="*{houseNumber}">Full name error</span>
+            <span th:if="${#fields.hasErrors('houseNumber')}" th:errors="*{houseNumber}"></span>
 
           </div>
           <div class="col-sm">
             <label for="flat">Nr mieszkania</label>
             <input type="text" class="form-control" id="flat" name="flat" th:field="*{flatNumber}">
+            <span th:if="${#fields.hasErrors('flatNumber')}" th:errors="*{flatNumber}"></span>
           </div>
         </div>
 
@@ -102,10 +106,12 @@
           <div class="col-sm">
             <label for="town" >Miasto</label>
             <input type="text" class="form-control" id="town" name="town" required="required" th:field="*{city}">
+            <span th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></span>
           </div>
           <div class="col-sm">
             <label for="postal" >Kod pocztowy</label>
             <input type="text" class="form-control" id="postal" name="postal" required="required" th:field="*{postalCode}">
+            <span th:if="${#fields.hasErrors('postalCode')}" th:errors="*{postalCode}"></span>
           </div>
         </div>
 
@@ -113,6 +119,7 @@
           <div class="col-sm">
             <label for="login-reg" >Login</label>
             <input type="text" class="form-control" id="login-reg" name="login" required="required" th:field="*{login}">
+            <span th:if="${#fields.hasErrors('login')}" th:errors="*{login}"></span>
           </div>
         </div>
 
@@ -120,10 +127,12 @@
           <div class="col-sm">
             <label for="phone" >Nr telefonu</label>
             <input type="text" class="form-control" id="phone" name="phone" required="required" th:field="*{phoneNumber}">
+            <span th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></span>
           </div>
           <div class="col-sm">
             <label for="e-mail" >E-mail</label>
             <input type="text" class="form-control" id="e-mail" name="mail" required="required" th:field="*{email}">
+            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
           </div>
         </div>
 

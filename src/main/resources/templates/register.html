@@ -46,65 +46,77 @@
 
     <div class="card bg-primary text-white w-600 h-550 mt-50 shadow">
 
-      <form action="registerUser" method="get">
+      <form th:action="@{/registerNewUser}" th:object="${userModel}" method="post" >
         <h2 class="content-title">Rejestracja</h2>
 
         <div class="form-row row-eq-spacing-sm">
           <div class="col-sm">
             <label for="name" class="required">Imię</label>
-            <input type="text" class="form-control" id="name" name="name" placeholder="Imię" required="required">
+            <input type="text" class="form-control" id="name" name="name" th:field="*{name}" placeholder="Imię" required="required">
+            <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+            <span th:if="${loginErrorMessage}" th:text="${loginErrorMessage}"></span>
           </div>
           <div class="col-sm">
             <label for="surname" class="required">Nazwisko</label>
-            <input type="text" class="form-control" id="surname" name="surname" placeholder="Nazwisko" required="required">
+            <input type="text" class="form-control" id="surname" name="surname" th:field="*{surname}" placeholder="Nazwisko" required="required">
+            <span th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"></span>
           </div>
         </div>
 
         <div class="form-row row-eq-spacing-sm">
           <div class="col-sm">
             <label for="streat" class="required">Ulica</label>
-            <input type="text" class="form-control" id="streat" name="street" placeholder="Ulica" required="required">
+            <input type="text" class="form-control" id="streat" name="street" th:field="*{street}" placeholder="Ulica" required="required">
+            <span th:if="${#fields.hasErrors('street')}" th:errors="*{street}"></span>
           </div>
           <div class="col-sm">
-            <label for="house" class="required">Nr domu</label>
-            <input type="text" class="form-control" id="house" name="house" placeholder="Nr domu" required="required">
+            <label for="houseNumber" class="required">Nr domu</label>
+            <input type="text" class="form-control" id="houseNumber" name="houseNumber" th:field="*{houseNumber}" placeholder="Nr domu" required="required">
+            <span th:if="${#fields.hasErrors('houseNumber')}" th:errors="*{houseNumber}"></span>
           </div>
           <div class="col-sm">
-            <label for="flat">Nr mieszkania</label>
-            <input type="text" class="form-control" id="flat" name="flat" placeholder="Nr mieszkania" maxlength="3">
-          </div>
-        </div>
-
-        <div class="form-row row-eq-spacing-sm">
-          <div class="col-sm">
-            <label for="town" class="required">Miasto</label>
-            <input type="text" class="form-control" id="town" name="town" placeholder="Miasto" required="required">
-          </div>
-          <div class="col-sm">
-            <label for="postal" class="required">Kod pocztowy</label>
-            <input type="text" class="form-control" id="postal" name="postal" placeholder="Kod pocztowy" required="required" maxlength="6">
+            <label for="flatNumber">Nr mieszkania</label>
+            <input type="text" class="form-control" id="flatNumber" name="flatNumber" th:field="*{flatNumber}" placeholder="Nr mieszkania" maxlength="3">
+            <span th:if="${#fields.hasErrors('flatNumber')}" th:errors="*{flatNumber}"></span>
           </div>
         </div>
 
         <div class="form-row row-eq-spacing-sm">
           <div class="col-sm">
-            <label for="login-reg" class="required">Login</label>
-            <input type="text" class="form-control" id="login-reg" name="login" placeholder="Login" required="required">
+            <label for="city" class="required">Miasto</label>
+            <input type="text" class="form-control" id="city" name="city" th:field="*{city}" placeholder="Miasto" required="required">
+            <span th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></span>
           </div>
           <div class="col-sm">
-            <label for="password-reg" class="required">Hasło</label>
-            <input type="password" class="form-control" id="password-reg" name="password" placeholder="Password" required="required">
+            <label for="postalCode" class="required">Kod pocztowy</label>
+            <input type="text" class="form-control" id="postalCode" name="postalCode" th:field="*{postalCode}" placeholder="Kod pocztowy" required="required" maxlength="6">
+            <span th:if="${#fields.hasErrors('postalCode')}" th:errors="*{postalCode}"></span>
           </div>
         </div>
 
         <div class="form-row row-eq-spacing-sm">
           <div class="col-sm">
-            <label for="phone" class="required">Nr telefonu</label>
-            <input type="text" class="form-control" id="phone" name="phone" placeholder="Nr telefonu" value="+48" required="required" maxlength="12">
+            <label for="login" class="required">Login</label>
+            <input type="text" class="form-control" id="login" name="login" th:field="*{login}" placeholder="Login" required="required">
+            <span th:if="${#fields.hasErrors('login')}" th:errors="*{login}"></span>
           </div>
           <div class="col-sm">
-            <label for="e-mail" class="required">E-mail</label>
-            <input type="text" class="form-control" id="e-mail" name="mail" placeholder="E-mail" required="required">
+            <label for="password" class="required">Hasło</label>
+            <input type="password" class="form-control" id="password" name="password" th:field="*{password}" placeholder="Password" required="required">
+            <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+          </div>
+        </div>
+
+        <div class="form-row row-eq-spacing-sm">
+          <div class="col-sm">
+            <label for="phoneNumber" class="required">Nr telefonu</label>
+            <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" th:field="*{phoneNumber}" placeholder="Nr telefonu" value="+48" required="required" maxlength="12">
+            <span th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></span>
+          </div>
+          <div class="col-sm">
+            <label for="email" class="required">E-mail</label>
+            <input type="text" class="form-control" id="email" name="email" th:field="*{email}" placeholder="E-mail" required="required">
+            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
           </div>
         </div>
 

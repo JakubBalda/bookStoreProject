@@ -29,35 +29,40 @@ import javax.servlet.http.HttpSession;
             }else{
                 model.addAttribute("message", "Password not changed, password must be strong");
             }
+
             return "userPanel";
         }
 
         @PostMapping("/editUserData")
         public String editUserData(@Valid @ModelAttribute("userModel") UserModel userModel, BindingResult result, HttpSession session){
+
             if(result.hasErrors()){
                 System.out.println(result);
-                return "redirect:userPanel";
+
+                return "userPanel";
             }
             UserModel user = GetUserDataUseCase.getData(session.getAttribute("userID").toString());
-
-
 
             if (EditUserDataUseCase.editData(user, userModel, session.getAttribute("userID").toString())) {
                 session.setAttribute("message", "Changes saved");
             }else{
                 session.setAttribute("message", "Changes cannot be saved or any data got changed");
             }
+
             return "redirect:userPanel";
         }
 
         @GetMapping("/deleteUserAccount")
         public String deleteUserAccount(HttpSession session, Model model){
+
             try {
                 UserRepository.deleteAccount(session.getAttribute("userID").toString());
             }catch (Exception ex){
                 model.addAttribute("deleteError", "Deleting account failed, try again later!");
+
                 return "redirect:userPanel";
             }
+
             return "redirect:logout";
         }
     }

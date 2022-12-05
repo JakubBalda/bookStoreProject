@@ -126,4 +126,56 @@ public class UserRepository {
 
         }
     }
+
+    //Register
+
+    public static void addUser(UserModel newUser) throws Exception{
+        String query = "INSERT INTO users (Name, Surname, Phone_number, Email, City, " +
+                "Street, House_number, Flat_Number, Postal_code, Role, Login, Password) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try {
+            PreparedStatement preparedStatement = dbConnection(query);
+            preparedStatement = prepareInsertQuery(newUser, preparedStatement);
+            preparedStatement.executeUpdate();
+
+        }catch (Exception ex){
+            System.out.println(ex);
+        }
+    
+    }
+
+    public static PreparedStatement prepareInsertQuery(UserModel newUser, PreparedStatement preparedStatement){
+        try {
+            preparedStatement.setString(1, newUser.getName());
+            preparedStatement.setString(2, newUser.getSurname());
+            preparedStatement.setString(3, newUser.getPhoneNumber());
+            preparedStatement.setString(4, newUser.getEmail());
+            preparedStatement.setString(5, newUser.getCity());
+            preparedStatement.setString(6, newUser.getStreet());
+            preparedStatement.setString(7, newUser.getHouseNumber());
+            preparedStatement.setString(8, newUser.getFlatNumber());
+            preparedStatement.setString(9, newUser.getPostalCode());
+            preparedStatement.setString(10, "Client");
+            preparedStatement.setString(11, newUser.getLogin());
+            preparedStatement.setString(12, newUser.getPassword());
+        }catch (Exception ex){
+            System.out.println(ex);
+        }
+
+        return preparedStatement;
+    }
+
+    public static boolean isLoginTaken(String login){
+        String query = "SELECT login FROM users WHERE login = ?";
+        String[] parameters = new String[]{login};
+
+        ResultSet loginExists = select(query, parameters);
+
+        if(loginExists == null){
+            return false;
+        }
+
+        return true;
+    }
 }

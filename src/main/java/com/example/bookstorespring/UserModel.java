@@ -8,24 +8,35 @@ public class UserModel {
     @Size(min = 3, max = 30, message = "Name must be between 3 - 30 signs")
     private String name;
     @NotBlank(message = "Surname is mandatory")
+    @Size(min = 3, max = 40, message = "Name must be between 3 - 30 signs")
     private String surname;
     @NotBlank(message = "Phone number is mandatory")
+    @Size(min = 12, max = 12, message = "Phone number must be 12 signs length")
     private String phoneNumber;
     @NotBlank(message = "Email is mandatory")
     @Email(message = "Incorrect email")
     private String email;
     @NotBlank(message = "City is mandatory")
+    @Size(min = 1, max = 40, message = "City must be between 1 - 40 signs")
     private String city;
     @NotBlank(message = "Street is mandatory")
+    @Size(min = 1, max = 40, message = "City must be between 1 - 40 signs")
     private String street;
     @NotBlank(message = "House number is mandatory")
     @Min(1)
     private String houseNumber;
+
     private String flatNumber;
-    @NotBlank(message = "Psotal code is mandatory")
+    @NotBlank(message = "Postal code is mandatory")
+    @Size(min = 6, max = 6, message = "Postal code must be 6 signs length")
     private String postalCode;
     @NotBlank(message = "Login is mandatory")
+    @Size(min = 4, max = 40, message = "Login must be between 4 - 40 signs")
     private String login;
+
+    @NotBlank
+    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$")
+    private String password;
 
     public UserModel(){
 
@@ -50,9 +61,9 @@ public class UserModel {
         this.city = city;
     }
 
-    public void setFlatNumber(String flatNumber) {
-        this.flatNumber = flatNumber;
-    }
+    public void setFlatNumber(String flatNumber) { this.flatNumber = flatNumber; }
+
+    public void setPassword(String password) { this.password = password; }
 
     public void setHouseNumber(String houseNumber) {
         this.houseNumber = houseNumber;
@@ -109,4 +120,6 @@ public class UserModel {
     public String getStreet() {
         return street;
     }
+
+    public String getPassword() { return password; }
 }
