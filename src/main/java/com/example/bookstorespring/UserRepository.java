@@ -12,22 +12,10 @@ public class UserRepository {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    public static PreparedStatement dbConnection(String query){
-        try {
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/greatbook", "root", "");
-            PreparedStatement preparedStatement = conn.prepareStatement(query);
-
-            return preparedStatement;
-        }catch(Exception ex){
-            System.out.println(ex);
-        }
-        return null;
-    }
-
     public static ResultSet select(String query, String[] parameters){
 
         try {
-            PreparedStatement preparedStatement = dbConnection(query);
+            PreparedStatement preparedStatement = DatabaseConnection.dbConnection(query);
             for(int i = 0; i<parameters.length; i++) {
                 preparedStatement.setString(i+1, parameters[i]);
             }
@@ -44,7 +32,7 @@ public class UserRepository {
 
     public static Boolean update(String query, String[] parameters){
         try{
-            PreparedStatement preparedStatement = dbConnection(query);
+            PreparedStatement preparedStatement = DatabaseConnection.dbConnection(query);
             for(int i = 0; i<parameters.length; i++) {
                 preparedStatement.setString(i+1, parameters[i]);
             }
@@ -103,7 +91,7 @@ public class UserRepository {
     }
 
     public static boolean updateUserData(String query){
-        PreparedStatement preparedStatement = dbConnection(query);
+        PreparedStatement preparedStatement = DatabaseConnection.dbConnection(query);
         try {
             preparedStatement.executeUpdate();
             return true;
@@ -117,7 +105,7 @@ public class UserRepository {
         String query = "DELETE FROM users WHERE User_ID = ?";
 
         try {
-            PreparedStatement preparedStatement = dbConnection(query);
+            PreparedStatement preparedStatement = DatabaseConnection.dbConnection(query);
             preparedStatement.setString(1, userID);
 
             preparedStatement.executeUpdate();
@@ -135,7 +123,7 @@ public class UserRepository {
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
-            PreparedStatement preparedStatement = dbConnection(query);
+            PreparedStatement preparedStatement = DatabaseConnection.dbConnection(query);
             preparedStatement = prepareInsertQuery(newUser, preparedStatement);
             preparedStatement.executeUpdate();
 

@@ -33,7 +33,6 @@ public class UserModel {
     @NotBlank(message = "Login is mandatory")
     @Size(min = 4, max = 40, message = "Login must be between 4 - 40 signs")
     private String login;
-
     @NotBlank
     @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$")
     private String password;

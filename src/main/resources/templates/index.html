@@ -60,7 +60,14 @@
 
 <div class="content-wrapper bg-dark-light">
 
-    <div class="d-flex justify-content-center ">
+    <div class="d-flex justify-content-between flex-column mt-50">
+
+        <div th:each="book: ${books}" class="card bg-light w-750 h-150">
+            <span th:text="${book.title}"></span>
+            <span th:text="${book.author}"></span>
+            <span th:text="${book.price}"></span>
+            <span th:text="${book.amount}"></span>
+        </div>
 
     </div>
 
