@@ -1,7 +1,7 @@
-package com.example.bookstorespring;
+package com.example.bookstorespring.services;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import com.example.bookstorespring.repositories.UserRepository;
+import com.example.bookstorespring.middleware.Validator;
 
 public class EditUserPasswordUseCase {
     public static boolean editPassword(String newPassword, String checkPassword, String userID){

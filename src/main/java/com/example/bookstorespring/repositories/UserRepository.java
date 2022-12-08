@@ -1,5 +1,8 @@
-package com.example.bookstorespring;
+package com.example.bookstorespring.repositories;
 
+import com.example.bookstorespring.DatabaseConnection;
+import com.example.bookstorespring.models.LoginModel;
+import com.example.bookstorespring.models.UserModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;

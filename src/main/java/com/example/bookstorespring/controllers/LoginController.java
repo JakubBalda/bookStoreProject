@@ -1,7 +1,7 @@
-package com.example.bookstorespring;
+package com.example.bookstorespring.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
+import com.example.bookstorespring.repositories.UserRepository;
+import com.example.bookstorespring.models.LoginModel;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

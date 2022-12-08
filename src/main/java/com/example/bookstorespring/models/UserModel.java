@@ -1,4 +1,4 @@
-package com.example.bookstorespring;
+package com.example.bookstorespring.models;
 
 import javax.validation.constraints.*;
 import java.io.Serializable;

@@ -1,5 +1,6 @@
 package com.example.bookstorespring;
 
+import com.example.bookstorespring.models.UserModel;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

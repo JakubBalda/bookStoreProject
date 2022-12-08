@@ -1,7 +1,11 @@
 
-    package com.example.bookstorespring;
+    package com.example.bookstorespring.controllers;
 
-import org.apache.catalina.User;
+import com.example.bookstorespring.services.EditUserDataUseCase;
+import com.example.bookstorespring.services.EditUserPasswordUseCase;
+import com.example.bookstorespring.services.GetUserDataUseCase;
+import com.example.bookstorespring.repositories.UserRepository;
+import com.example.bookstorespring.models.UserModel;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import javax.validation.Valid;

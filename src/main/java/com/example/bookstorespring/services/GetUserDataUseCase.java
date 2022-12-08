@@ -1,4 +1,7 @@
-package com.example.bookstorespring;
+package com.example.bookstorespring.services;
+
+import com.example.bookstorespring.repositories.UserRepository;
+import com.example.bookstorespring.models.UserModel;
 
 import java.sql.ResultSet;
 

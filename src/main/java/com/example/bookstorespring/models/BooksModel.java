@@ -1,12 +1,16 @@
-package com.example.bookstorespring;
+package com.example.bookstorespring.models;
 
 public class BooksModel {
 
+    private String bookID;
     private String title;
     private String author;
     private float price;
     private int amount;
 
+    public void setBookID(String bookID) {
+        this.bookID = bookID;
+    }
     public void setTitle(String title) {
         this.title = title;
     }
@@ -21,6 +25,10 @@ public class BooksModel {
 
     public void setAmount(int amount) {
         this.amount = amount;
+    }
+
+    public String getBookID() {
+        return bookID;
     }
 
     public String getTitle() {

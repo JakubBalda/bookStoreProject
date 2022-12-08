@@ -1,5 +1,7 @@
-package com.example.bookstorespring;
+package com.example.bookstorespring.controllers;
 
+import com.example.bookstorespring.repositories.UserRepository;
+import com.example.bookstorespring.models.UserModel;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
