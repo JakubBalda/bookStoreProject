@@ -1,5 +1,6 @@
 package com.example.bookstorespring.controllers;
 
+import com.example.bookstorespring.models.BooksModel;
 import com.example.bookstorespring.repositories.UserRepository;
 import com.example.bookstorespring.models.LoginModel;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,8 @@ public class LoginController {
             if (user != null && user.getLogin().equals(login) && user.getPassword().equals(password)) {
                 session.setAttribute("role", user.getRole());
                 session.setAttribute("userID", user.getUserID());
+                model.addAttribute("cartBook", new BooksModel());
+
                 return "redirect:/";
             } else {
                 model.addAttribute("message", "Unable to login, wrong password or login");
