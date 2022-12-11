@@ -40,6 +40,8 @@ public class LoginController {
     @GetMapping("/logout")
     public String logout(HttpSession session){
         session.removeAttribute("role");
+        session.removeAttribute("booksInCart");
+        session.removeAttribute("fullOrderPrice");
         return "redirect:/";
     }
 }

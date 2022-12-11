@@ -22,23 +22,6 @@ public class Router {
             return "cart";
         }
 
-    @PostMapping("/addToCart")
-    public String addToCart(HttpSession session, @ModelAttribute("cartBook") BooksModel bookToCart){
-        if(session.getAttribute("booksInCart") == null){
-            ArrayList<BooksModel> booksInCart = new ArrayList<BooksModel>();
-            booksInCart.add(bookToCart);
-            session.setAttribute("booksInCart", booksInCart);
-
-        }else {
-            Object booksInCartSession = session.getAttribute("booksInCart");
-            ArrayList <BooksModel> booksInCart = (ArrayList) booksInCartSession;
-            booksInCart.add(bookToCart);
-            session.setAttribute("booksInCart", booksInCart);
-        }
-
-        return "redirect:/";
-    }
-
     @GetMapping("/login")
     public String loginPage(){
         return "login";

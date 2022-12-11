@@ -1,6 +1,7 @@
 package com.example.bookstorespring.controllers;
 
 import com.example.bookstorespring.models.BookModel;
+import com.example.bookstorespring.models.CartBookModel;
 import com.example.bookstorespring.services.GetAllBooksUseCase;
 import com.example.bookstorespring.models.BooksModel;
 import com.example.bookstorespring.services.GetBookDetailsUseCase;
@@ -17,11 +18,12 @@ public class BookController {
 
     @GetMapping("/")
     public String homePage(Model model, @RequestParam(value = "sort", required = false, defaultValue = "ASC") String sort){
+        model.addAttribute("cartBook", new CartBookModel());
+
         if(model.getAttribute("books") == null) {
             ArrayList<BooksModel> books = GetAllBooksUseCase.getBooks(sort);
             model.addAttribute("books", books);
 
-            model.addAttribute("cartBook", new BooksModel());
         }
 
         return "index";
