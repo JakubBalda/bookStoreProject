@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Great Book</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link href="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/css/halfmoon-variables.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/js/halfmoon.min.js"></script>
+  <link rel="stylesheet" th:href="@{/style/style.css}" type="text/css">
+  <link rel="stylesheet" th:href="@{/style/fontello.css}" type="text/css">
+
+</head>
+<body>
+<div class="page-wrapper with-navbar">
+  <nav class="navbar justify-content-between bg-dark ">
+    <div class="d-flex ">
+      <a href="/" class=" pt-7 font-size-20 text-white">
+        Great Book
+      </a>
+
+      <span class="navbar-text text-monospace text-white font-size-14"> Piekary Śląskie</span>
+
+      <ul class="navbar-nav d-none d-md-flex font-weight-semi-bold ">
+
+        <li class="new-item active mt-auto mb-auto">
+          <a href="/#kontakt" class="nav-link text-white">Kontakt</a>
+        </li>
+
+      </ul>
+    </div>
+
+    <div class="d-flex">
+      <button onclick="location='userPanel'" class="btn btn-primary mr-15" th:if="${session.role != null}">
+        <i class="icon-user" th:text="${session.role}"></i>
+      </button>
+
+      <button onclick="location='myCart'" class="btn btn-primary ml-auto mr-15" th:if="${session.role != null}">
+        <i class="icon-basket">Koszyk</i>
+      </button>
+
+      <button  onclick="location='login'" class="btn btn-primary text-white ml-auto mr-15" th:if="${session.role == null}">
+        <i class="icon-login"> Zaloguj się</i>
+      </button>
+
+      <button onclick="location='logout'" class="btn btn-primary text-white ml-auto mr-15" th:if="${session.role != null}">
+        <i class="icon-login"> Wyloguj się</i>
+      </button>
+
+
+    </div>
+
+  </nav>
+
+
+</div>
+
+<div class="content-wrapper bg-dark-light">
+  <div class="d-flex h-full justify-content-center">
+
+    <div class="card bg-primary text-white w-600 h-600 mt-50 shadow">
+
+      <form th:action="@{/editBookDetails}" th:object="${book}" method="post" >
+        <h2 class="content-title">Edytuj książke</h2>
+
+        <div class="form-row row-eq-spacing-sm">
+          <div class="col-sm">
+            <label for="title" class="required">Tytuł</label>
+            <input type="text" class="form-control" id="title" name="title" th:field="*{title}" placeholder="title" required="required">
+            <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+            <span th:if="${title}" th:text="${title}"></span>
+          </div>
+
+          <div class="col-sm">
+            <label for="publisher" class="required">Wydawnictwo</label>
+            <input type="text" class="form-control" id="publisher" name="publisher" th:field="*{publisher}" placeholder="publisher" required="required">
+            <span th:if="${#fields.hasErrors('publisher')}" th:errors="*{publisher}"></span>
+          </div>
+
+
+        </div>
+
+        <div class="form-row row-eq-spacing-sm">
+          <div class="col-sm">
+            <label for="authorName" class="required">Imię Autora</label>
+            <input type="text" class="form-control" id="authorName" name="authorName" th:field="*{authorName}" placeholder="authorName" required="required">
+            <span th:if="${#fields.hasErrors('authorName')}" th:errors="*{authorName}"></span>
+          </div>
+          <div class="col-sm">
+            <label for="authorSurname" class="required">Nazwisko Autora</label>
+            <input type="text" class="form-control" id="authorSurname" name="authorSurname" th:field="*{authorSurname}" placeholder="authorSurname" required="required">
+            <span th:if="${#fields.hasErrors('authorSurname')}" th:errors="*{authorSurname}"></span>
+          </div>
+
+
+        </div>
+
+        <div class="form-row row-eq-spacing-sm">
+          <div class="col-sm">
+            <label for="numberOfPages" class="required">Liczba stron</label>
+            <input type="text" class="form-control" id="numberOfPages" name="numberOfPages" th:field="*{numberOfPages}" placeholder="numberOfPages" required="required">
+            <span th:if="${#fields.hasErrors('numberOfPages')}" th:errors="*{numberOfPages}"></span>
+          </div>
+          <div class="col-sm">
+            <label for="isbn" class="required">ISBN</label>
+            <input type="text" class="form-control" id="isbn" name="isbn" th:field="*{isbn}" placeholder="isbn" required="required" maxlength="6">
+            <span th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}"></span>
+          </div>
+        </div>
+
+        <div class="form-row row-eq-spacing-sm">
+          <div class="col-sm">
+            <label for="price" class="required">Cena</label>
+            <input type="text" class="form-control" id="price" name="price" th:field="*{price}" placeholder="price" required="required">
+            <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span>
+          </div>
+          <div class="col-sm">
+            <label for="amount" class="required">Ilość</label>
+            <input type="text " class="form-control" id="amount" name="amount" th:field="*{amount}" placeholder="Set at least 0" required="required">
+            <span th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}"></span>
+          </div>
+
+        </div>
+
+        <div class="form-row row-eq-spacing-sm">
+          <div class="col-sm">
+            <label for="description">Opis</label>
+            <textarea class="form-control" id="description" name="description" th:field="*{description}" placeholder="description"></textarea>
+            <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+          </div>
+        </div>
+        <input type="hidden" name="bookID" id="bookID" th:field="*{bookID}">
+
+        <div class="text-right">
+          <input type="submit" class="btn btn-success" value="Edytuj">
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="d-flex position-fixed bottom-0 w-full">
+    <footer class="pl-20 bg-dark-light w-full text-white font-weight-semi-bold">
+      <span>&copy: Wszelkie prawa zastrzeżone</span>
+    </footer>
+  </div>
+</div>
+</body>
+</html>

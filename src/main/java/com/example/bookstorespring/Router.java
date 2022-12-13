@@ -1,5 +1,6 @@
 package com.example.bookstorespring;
 
+import com.example.bookstorespring.models.BookModel;
 import com.example.bookstorespring.models.BooksModel;
 import com.example.bookstorespring.models.UserModel;
 import org.springframework.stereotype.Controller;

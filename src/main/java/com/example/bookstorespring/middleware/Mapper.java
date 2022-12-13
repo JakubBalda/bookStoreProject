@@ -2,6 +2,7 @@ package com.example.bookstorespring.middleware;
 
 import com.example.bookstorespring.models.BookModel;
 import com.example.bookstorespring.models.BooksModel;
+import com.example.bookstorespring.models.EditBookModel;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -41,6 +42,31 @@ public class Mapper {
                     book.setTitle(result.getString(2));
                     book.setPrice(Float.parseFloat(result.getString(3)));
                     book.setAuthor(result.getString(4) + " " +result.getString(5));
+                    book.setDescription(result.getString(6));
+                    book.setNumberOfPages(Integer.parseInt(result.getString(7)));
+                    book.setIsbn(result.getString(8));
+                    book.setPublisher(result.getString(9));
+                    book.setAmount(Integer.parseInt(result.getString(10)));
+                }
+            }
+
+            return book;
+        }catch (Exception ex){
+            System.out.println(ex);
+        }
+        return null;
+    }
+
+    public static EditBookModel mapToEditBookModel(ResultSet result, EditBookModel book){
+
+        try {
+            if(result != null){
+                while (result.next()){
+                    book.setBookID(result.getString(1));
+                    book.setTitle(result.getString(2));
+                    book.setPrice(Float.parseFloat(result.getString(3)));
+                    book.setAuthorName(result.getString(4));
+                    book.setAuthorSurname(result.getString(5));
                     book.setDescription(result.getString(6));
                     book.setNumberOfPages(Integer.parseInt(result.getString(7)));
                     book.setIsbn(result.getString(8));
