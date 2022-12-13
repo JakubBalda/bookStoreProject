@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.awt.print.Book;
 import java.util.ArrayList;
 
 @Controller
@@ -42,7 +41,9 @@ public class BookController {
     public String nextPage(Model model, HttpSession session, @RequestParam(value = "sort", required = false, defaultValue = "ASC") String sort){
         int min = Integer.parseInt(session.getAttribute("min").toString());
         int max = Integer.parseInt(session.getAttribute("max").toString());
-        sort = session.getAttribute("sort").toString();
+
+        if(session.getAttribute("sort") != null)
+            sort = session.getAttribute("sort").toString();
 
 
         if(max<10){
@@ -64,7 +65,9 @@ public class BookController {
     public String previousPage(Model model, HttpSession session, @RequestParam(value = "sort", required = false, defaultValue = "ASC") String sort){
         int min = Integer.parseInt(session.getAttribute("min").toString());
         int max = Integer.parseInt(session.getAttribute("max").toString());
-        sort = session.getAttribute("sort").toString();
+
+        if(session.getAttribute("sort") != null)
+            sort = session.getAttribute("sort").toString();
 
         if(min != 0){
             min = min - 5;
@@ -126,15 +129,35 @@ public class BookController {
     }
 
     @PostMapping("/editBookDetails")
-    public String editDetails(@Valid @ModelAttribute("book") EditBookModel book, BindingResult bindingResult){
+    public String editDetails(@Valid @ModelAttribute("book") EditBookModel book, BindingResult result){
 
-        if(bindingResult.hasErrors()){
-            System.out.println(bindingResult);
+        if(result.hasErrors()){
+            System.out.println(result);
 
             return "bookForm";
         }
 
         EditBookDataUseCase.editBookDetails(book);
+
+        return "redirect:/";
+    }
+
+    @GetMapping("/addBook")
+    public String addBookPage(Model model){
+        EditBookModel addBookModel = new EditBookModel();
+        model.addAttribute("addBookModel", addBookModel);
+        return "addBookForm";
+    }
+
+    @PostMapping("addNewBook")
+    public String addNewBook(@Valid @ModelAttribute("addBookModel") EditBookModel book, BindingResult result){
+
+        if(result.hasErrors()){
+            System.out.println(result);
+
+            return "addBookForm";
+        }
+        AddNewBookUseCase.addNewBookToStore(book);
 
         return "redirect:/";
     }

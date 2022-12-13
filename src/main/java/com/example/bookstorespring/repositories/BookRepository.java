@@ -82,6 +82,30 @@ public class BookRepository {
 
         try {
             PreparedStatement preparedStatement = DatabaseConnection.dbConnection(query);
+            preparedStatement = prepareQuery(preparedStatement, book);
+            preparedStatement.setString(10, book.getBookID());
+
+            preparedStatement.executeUpdate();
+        }catch (SQLException ex){
+            System.out.println(ex);
+        }
+    }
+
+    public static void addNewBook(EditBookModel book){
+        String query = "INSERT INTO books (Title, Price, Author_name, Author_surname, Description, Page_number, ISBN,  Publisher, Amount) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try {
+            PreparedStatement preparedStatement = DatabaseConnection.dbConnection(query);
+            preparedStatement = prepareQuery(preparedStatement, book);
+            preparedStatement.executeUpdate();
+        }catch (SQLException ex){
+            System.out.println(ex);
+        }
+    }
+
+    public static PreparedStatement prepareQuery(PreparedStatement preparedStatement, EditBookModel book){
+        try {
             preparedStatement.setString(1, book.getTitle());
             preparedStatement.setFloat(2, book.getPrice());
             preparedStatement.setString(3, book.getAuthorName());
@@ -91,11 +115,11 @@ public class BookRepository {
             preparedStatement.setString(7, book.getIsbn());
             preparedStatement.setString(8, book.getPublisher());
             preparedStatement.setInt(9, book.getAmount());
-            preparedStatement.setString(10, book.getBookID());
 
-            preparedStatement.executeUpdate();
         }catch (SQLException ex){
             System.out.println(ex);
         }
+
+        return preparedStatement;
     }
 }

@@ -11,7 +11,7 @@ public class EditBookModel {
     @Size(min = 3, max = 40, message = "Title must be between 5 - 40 signs length")
     private String title;
     @NotBlank(message = "Author name cannot be blank")
-    @Size(min = 3, max = 40, message = "Author name must be between 5 - 40 signs length")
+    @Size(min = 2, max = 40, message = "Author name must be between 2 - 40 signs length")
     private String authorName;
     @NotBlank(message = "Author surname cannot be blank")
     @Size(min = 3, max = 40, message = "Author surname must be between 5 - 40 signs length")

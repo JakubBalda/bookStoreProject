@@ -65,8 +65,8 @@
 
     <div class="card bg-primary text-white w-600 h-600 mt-50 shadow">
 
-      <form th:action="@{/editBookDetails }" th:object="${book}" method="post" >
-        <h2 class="content-title">Edytuj książke</h2>
+      <form th:action="@{/addNewBook}" th:object="${addBookModel}" method="post" >
+        <h2 class="content-title">Dodaj książke</h2>
 
         <div class="form-row row-eq-spacing-sm">
           <div class="col-sm">
@@ -137,7 +137,7 @@
         <input type="hidden" name="bookID" id="bookID" th:field="*{bookID}">
 
         <div class="text-right">
-          <input type="submit" class="btn btn-success" value="Edytuj">
+          <input type="submit" class="btn btn-success" value="Dodaj">
         </div>
       </form>
     </div>
