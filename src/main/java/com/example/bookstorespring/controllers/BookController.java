@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.awt.print.Book;
 import java.util.ArrayList;
@@ -18,11 +19,18 @@ import java.util.ArrayList;
 public class BookController {
 
     @GetMapping("/")
-    public String homePage(Model model, @RequestParam(value = "sort", required = false, defaultValue = "ASC") String sort){
+    public String homePage(Model model, @RequestParam(value = "sort", required = false, defaultValue = "ASC") String sort, HttpSession session){
+        int min = 0;
+        int max = 4;
+
+        session.setAttribute("min", min);
+        session.setAttribute("max", max);
         model.addAttribute("cartBook", new CartBookModel());
 
         if(model.getAttribute("books") ==  null) {
-            ArrayList<BooksModel> books = GetAllBooksUseCase.getBooks(sort);
+            ArrayList<BooksModel> books = GetAllBooksUseCase.getBooks(sort, min, max);
+            session.setAttribute("arraySize", books.size());
+
             model.addAttribute("books", books);
 
         }
@@ -30,10 +38,57 @@ public class BookController {
         return "index";
     }
 
+    @GetMapping("/nextPage")
+    public String nextPage(Model model, HttpSession session, @RequestParam(value = "sort", required = false, defaultValue = "ASC") String sort){
+        int min = Integer.parseInt(session.getAttribute("min").toString());
+        int max = Integer.parseInt(session.getAttribute("max").toString());
+        sort = session.getAttribute("sort").toString();
+
+
+        if(max<10){
+            min = min + 5;
+            max = max + 5;
+
+            session.setAttribute("min", min);
+            session.setAttribute("max", max);
+
+            ArrayList<BooksModel> books = GetAllBooksUseCase.getBooks(sort, min, max);
+            session.setAttribute("arraySize", books.size());
+
+            model.addAttribute("books", books);
+        }
+
+        return "index";
+    }
+    @GetMapping("/previousPage")
+    public String previousPage(Model model, HttpSession session, @RequestParam(value = "sort", required = false, defaultValue = "ASC") String sort){
+        int min = Integer.parseInt(session.getAttribute("min").toString());
+        int max = Integer.parseInt(session.getAttribute("max").toString());
+        sort = session.getAttribute("sort").toString();
+
+        if(min != 0){
+            min = min - 5;
+            max = max - 5;
+
+            session.setAttribute("min", min);
+            session.setAttribute("max", max);
+
+            ArrayList<BooksModel> books = GetAllBooksUseCase.getBooks(sort, min, max);
+            session.setAttribute("arraySize", books.size());
+            model.addAttribute("books", books);
+        }
+
+        return "index";
+    }
 
     @GetMapping("/sorting")
-    public String sorted(Model model, @RequestParam(value = "sort") String sort){
-        ArrayList<BooksModel> books = GetAllBooksUseCase.getBooks(sort);
+    public String sorted(Model model, @RequestParam(value = "sort") String sort, HttpSession session){
+        int min = Integer.parseInt(session.getAttribute("min").toString());
+        int max = Integer.parseInt(session.getAttribute("max").toString());
+
+        ArrayList<BooksModel> books = GetAllBooksUseCase.getBooks(sort, min, max);
+        session.setAttribute("arraySize", books.size());
+        session.setAttribute("sort", sort);
         model.addAttribute("books", books);
 
         return "index";
